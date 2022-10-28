@@ -84,6 +84,9 @@ class CatViewModelTest {
 }
 
 
+/**
+ * Test helper to wait for the value of livedata
+ */
 object TestHelper {
     fun <T> LiveData<T>.getOrAwaitValue(
         time: Long = 2,
@@ -101,7 +104,6 @@ object TestHelper {
         }
         this.observeForever(observer)
         afterObserve.invoke()
-        // Don't wait indefinitely if the LiveData is not set.
         if (!latch.await(time, timeUnit)) {
             this.removeObserver(observer)
             throw TimeoutException("LiveData value was never set.")
