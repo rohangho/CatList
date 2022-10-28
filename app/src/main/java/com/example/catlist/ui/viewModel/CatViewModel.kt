@@ -21,7 +21,7 @@ class CatViewModel @Inject constructor(
     val responseData: LiveData<ResponseState> = _responseData
 
     fun getCatData() {
-        page ++;
+        page++;
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 _responseData.postValue(carRepo.getData(page))

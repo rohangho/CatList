@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catlist.R
 import com.example.catlist.domain.model.CatDetail
-import com.example.catlist.ui.activity.MainActivity
 import com.example.catlist.ui.viewholder.CatIndividualView
 
-class CatDisplayAdapter(context: Context ) : RecyclerView.Adapter<CatIndividualView>() {
+class CatDisplayAdapter(context: Context) : RecyclerView.Adapter<CatIndividualView>() {
     private var catList: MutableList<CatDetail> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatIndividualView {

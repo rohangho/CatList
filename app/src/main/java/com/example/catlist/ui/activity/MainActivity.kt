@@ -1,8 +1,6 @@
 package com.example.catlist.ui.activity
 
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -58,7 +56,11 @@ class MainActivity : AppCompatActivity() {
     private fun setObserver() {
         mainViewModel.responseData.observe(this) {
             when (it) {
-                is  ResponseState.FailData -> Toast.makeText(this,"Something Went Wrong",Toast.LENGTH_SHORT).show()
+                is ResponseState.FailData -> Toast.makeText(
+                    this,
+                    "Something Went Wrong",
+                    Toast.LENGTH_SHORT
+                ).show()
                 is ResponseState.SuccessData -> successInflateData(it.listOfImage)
             }
         }
