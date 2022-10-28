@@ -6,8 +6,8 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 class CatRepository @Inject constructor(private val retrofitInstance: Retrofit) {
-    suspend fun getData(): ResponseState {
-        val responseData = retrofitInstance.create(NetworkCall::class.java).getDetail("0");
+    suspend fun getData(page: Int): ResponseState {
+        val responseData = retrofitInstance.create(NetworkCall::class.java).getDetail(pageNo =page );
         if (responseData.isSuccessful)
             responseData.body()?.let {
                 return ResponseState.SuccessData(it)

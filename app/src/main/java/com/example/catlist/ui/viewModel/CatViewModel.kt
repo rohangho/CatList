@@ -15,14 +15,16 @@ class CatViewModel @Inject constructor(
     val carRepo: CatRepository
 ) : ViewModel() {
 
+    private var page = -1
 
     private val _responseData: MutableLiveData<ResponseState> = MutableLiveData()
     val responseData: LiveData<ResponseState> = _responseData
 
     fun getCatData() {
+        page ++;
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                _responseData.postValue(carRepo.getData())
+                _responseData.postValue(carRepo.getData(page))
             }
         }
     }

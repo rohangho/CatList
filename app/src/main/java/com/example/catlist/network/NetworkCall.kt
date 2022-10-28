@@ -8,5 +8,5 @@ import retrofit2.http.Query
 interface NetworkCall {
 
     @GET("search?format=json&size=med&limit=10")
-    suspend fun getDetail(@Query("page") pageNo: String): Response<List<CatDetail>>
+    suspend fun getDetail(@Query("page") pageNo: Int): Response<List<CatDetail>>
 }
