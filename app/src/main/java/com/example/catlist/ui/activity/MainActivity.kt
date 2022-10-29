@@ -13,6 +13,7 @@ import com.example.catlist.domain.datasoursce.ResponseState
 import com.example.catlist.domain.model.CatDetail
 import com.example.catlist.ui.adapter.CatDisplayAdapter
 import com.example.catlist.ui.viewModel.CatViewModel
+import com.example.catlist.utils.AdapterTypeFactoryImpl
 import javax.inject.Inject
 
 
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView() {
-        catListAdapter = CatDisplayAdapter(this)
+        catListAdapter = CatDisplayAdapter(this,AdapterTypeFactoryImpl())
         binding.catList.layoutManager = LinearLayoutManager(this)
         binding.catList.adapter = catListAdapter
 

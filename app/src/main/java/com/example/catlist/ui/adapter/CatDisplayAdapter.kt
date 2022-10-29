@@ -2,37 +2,43 @@ package com.example.catlist.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.catlist.R
 import com.example.catlist.domain.model.CatDetail
 import com.example.catlist.ui.viewholder.CatIndividualView
+import com.example.catlist.utils.*
 
-class CatDisplayAdapter(context: Context) : RecyclerView.Adapter<CatIndividualView>() {
-    private var catList: MutableList<CatDetail> = ArrayList()
+class CatDisplayAdapter(context: Context, val typeFactory: AdapterTypeFactory) : RecyclerView.Adapter<BaseViewHolder<Visitable>>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatIndividualView {
-        val v: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.cat_individual, parent, false)
-        return CatIndividualView(v)
+    private var allItems = mutableListOf<Visitable>()
+
+    override fun getItemViewType(position: Int): Int {
+        return allItems[position].getType(typeFactory)
     }
 
-    override fun onBindViewHolder(holder: CatIndividualView, position: Int) {
-        holder.bind(catList[position])
-    }
 
     override fun getItemCount(): Int {
-        return catList.size
+        return allItems.size
     }
 
     fun setupdatedList(listOfImage: List<CatDetail>) {
-        if (catList.isEmpty()) {
-            this.catList = listOfImage as MutableList<CatDetail>
+        if (allItems.isEmpty()) {
+            this.allItems = listOfImage as MutableList<Visitable>
             notifyDataSetChanged()
         } else {
-            catList.addAll(listOfImage)
-            notifyItemInserted(catList.size - 1)
+            allItems.addAll(listOfImage)
+            notifyItemInserted(allItems.size - 1)
         }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Visitable> {
+        if (parent != null) {
+            val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+            return typeFactory.holder(viewType, view) as BaseViewHolder<Visitable>
+        }
+        throw RuntimeException("Parent is null")    }
+
+    override fun onBindViewHolder(holder: BaseViewHolder<Visitable>, position: Int) {
+        holder.bind(allItems[position])
     }
 }
