@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.catlist.domain.model.CatDetail
-import com.example.catlist.ui.viewholder.CatIndividualView
-import com.example.catlist.utils.*
+import com.example.catlist.utils.AdapterTypeFactory
+import com.example.catlist.utils.BaseViewHolder
+import com.example.catlist.utils.Visitable
 
-class CatDisplayAdapter(context: Context, val typeFactory: AdapterTypeFactory) : RecyclerView.Adapter<BaseViewHolder<Visitable>>() {
+class CatDisplayAdapter(context: Context, val typeFactory: AdapterTypeFactory) :
+    RecyclerView.Adapter<BaseViewHolder<Visitable>>() {
 
     private var allItems = mutableListOf<Visitable>()
 
@@ -36,7 +38,8 @@ class CatDisplayAdapter(context: Context, val typeFactory: AdapterTypeFactory) :
             val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
             return typeFactory.holder(viewType, view) as BaseViewHolder<Visitable>
         }
-        throw RuntimeException("Parent is null")    }
+        throw RuntimeException("Parent is null")
+    }
 
     override fun onBindViewHolder(holder: BaseViewHolder<Visitable>, position: Int) {
         holder.bind(allItems[position])

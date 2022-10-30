@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView() {
-        catListAdapter = CatDisplayAdapter(this,AdapterTypeFactoryImpl())
+        catListAdapter = CatDisplayAdapter(this, AdapterTypeFactoryImpl())
         binding.catList.layoutManager = LinearLayoutManager(this)
         binding.catList.adapter = catListAdapter
 

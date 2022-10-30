@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class CatDetail(
     @SerializedName("url")
     val url: String? = null
-): Visitable() {
+) : Visitable() {
     override fun getType(typeFactory: AdapterTypeFactory): Int {
         return typeFactory.type(this)
     }
